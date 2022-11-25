@@ -34,7 +34,7 @@ export const Contact = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 container text-white'>
+    <div className='grid grid-cols-1 md:grid-cols-2 container p-4 text-white'>
       <div className='py-4'>
         <h1 className='text-xl '>Contact Me:</h1>
         <img src={img} alt='' className='rounded md:w-96' />

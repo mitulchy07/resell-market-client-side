@@ -36,7 +36,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <Link className='btn btn-ghost normal-case text-xl'>
+          <Link className='btn btn-ghost normal-case text-xl' to='/'>
             <img
               src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmsXC9m1hhVaaM7Xtd4uh5q9HJfp5H78qiH48tojh-M4-PDDLhugctBIcn52MFQNSbY0Q&usqp=CAU'
               width='50'
@@ -60,7 +60,9 @@ const Header = () => {
           </ul>
         </div>
         <div className='navbar-end'>
-          <Link className='btn btn-success'>Get started</Link>
+          <Link className='btn btn-primary' to='/login'>
+            Login
+          </Link>
         </div>
       </div>
     </div>
