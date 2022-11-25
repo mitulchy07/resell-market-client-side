@@ -26,7 +26,7 @@ const Register = () => {
       <input
         className='input btn-success btn-outline'
         type='name'
-        {...register('name', { required: 'Name is requierd' })}
+        {...register('displayName', { required: 'Name is requierd' })}
         placeholder='Full Name'
       />
       {errors.name && <p className='text-red-600'> {errors.name?.message} </p>}
