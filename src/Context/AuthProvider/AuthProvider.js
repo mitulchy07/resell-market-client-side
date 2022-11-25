@@ -38,7 +38,9 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
   const updateUser = (userInfo) => {
-    updateProfile(user, userInfo)
+    updateProfile(auth.currentUser, {
+      displayName: userInfo,
+    })
       .then(() => {})
       .catch((error) => console.error(error));
   };

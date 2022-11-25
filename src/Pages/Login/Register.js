@@ -18,10 +18,11 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        const userInfo = {
-          displayName: data.name,
-        };
-        updateUser(userInfo);
+        // const userInfo = {
+        //   displayName: data.name,
+        // };
+
+        updateUser(data.name);
         notify();
       })
       .catch((err) => {
@@ -66,7 +67,7 @@ const Register = () => {
       {errors.password && (
         <p className='text-red-600'> {errors.password?.message} </p>
       )}
-      <div className='m-5'>
+      <div className=' m-5'>
         <input
           {...register('status', { required: true })}
           type='radio'
