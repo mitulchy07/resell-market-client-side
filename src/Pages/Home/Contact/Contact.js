@@ -1,6 +1,6 @@
 import emailjs from '@emailjs/browser';
 import React, { useContext, useRef } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import img from '../../../images/cat.jpg';
@@ -69,7 +69,6 @@ export const Contact = () => {
           />
           <input className='btn btn-success' type='submit' value='Send' />
         </form>
-        <ToastContainer />
       </div>
     </div>
   );

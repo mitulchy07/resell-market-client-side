@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Register = () => {
@@ -9,14 +10,24 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
+  const notify = () => toast('Message Sent.');
+  const [signUpError, setSignUpError] = useState('');
   const handleSignUp = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo);
+        notify();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setSignUpError(err.message);
+      });
   };
   return (
     <form
@@ -55,7 +66,7 @@ const Register = () => {
       {errors.password && (
         <p className='text-red-600'> {errors.password?.message} </p>
       )}
-      <div className='text-white m-5'>
+      <div className='m-5'>
         <input
           {...register('status', { required: true })}
           type='radio'
@@ -74,6 +85,7 @@ const Register = () => {
       </div>
       <Link to='/login'>Already have an account?</Link>
       <input className='input btn-success btn-outline' type='submit' />
+      <p className='text-red-500'>{signUpError}</p>
     </form>
   );
 };

@@ -43,7 +43,7 @@ const Header = () => {
               src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmsXC9m1hhVaaM7Xtd4uh5q9HJfp5H78qiH48tojh-M4-PDDLhugctBIcn52MFQNSbY0Q&usqp=CAU'
               width='50'
               height='50'
-              className='d-none d-lg-block align-top rounded-circle text-white mx-1'
+              className='d-none d-lg-block align-top rounded text-white mx-1'
               alt=''
             />
             <span>
@@ -61,7 +61,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <div className='navbar-end'>
+        <div className='navbar-end mx-5'>
           {user?.email ? (
             <Link className='btn btn-primary' onClick={logout}>
               Logout
