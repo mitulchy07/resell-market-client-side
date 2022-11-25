@@ -9,7 +9,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { login } = useContext(AuthContext);
+  const { login, handleGoogleSignIn } = useContext(AuthContext);
   const handleLogin = (data) => {
     login(data.email, data.password)
       .then((result) => {
@@ -48,7 +48,9 @@ const Login = () => {
         <input className='input btn-success btn-outline' type='submit' />
       </form>
       <div className='divider'>OR</div>
-      <Link className='btn btn-outline mx-5'>Sign in with Google</Link>
+      <Link className='btn btn-outline mx-5' onClick={handleGoogleSignIn}>
+        Sign in with Google
+      </Link>
     </div>
   );
 };
