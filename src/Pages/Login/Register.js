@@ -9,6 +9,7 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
   const notify = () => toast('Message Sent.');
@@ -22,8 +23,8 @@ const Register = () => {
         notify();
 
         const userData = {
-          userName: data.name,
-          userEmail: data.email,
+          name: data.name,
+          email: data.email,
           role: data.status,
           verified: false,
         };
@@ -43,6 +44,7 @@ const Register = () => {
             }
           })
           .catch((err) => console.error(err));
+        reset();
       })
       .catch((err) => {
         console.error(err);

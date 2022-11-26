@@ -59,6 +59,10 @@ const Header = () => {
             <li>
               <Link to='/faq'>FAQ</Link>
             </li>
+
+            <li>
+              <Link to={`dashboard/${user?.email}`}>Dashboard</Link>
+            </li>
           </ul>
         </div>
         <div className='navbar-end mx-5'>
