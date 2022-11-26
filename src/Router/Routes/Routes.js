@@ -1,7 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
+import DashboardLayout from '../../layout/DashboardLayout';
 import Main from '../../layout/Main';
 import Blog from '../../Pages/Blog/Blog';
-import Dashboard from '../../Pages/Dashboard/Dashboard';
+import AddItem from '../../Pages/Dashboard/AddItem/AddItem';
+import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
+
 import Faq from '../../Pages/Faq/Faq';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login';
@@ -33,17 +36,27 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login></Login>,
       },
+    ],
+  },
+  {
+    path: '/',
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
       {
         path: '/dashboard/:email',
-        element: (
-          <PrivateRoute>
-            <Dashboard></Dashboard>
-          </PrivateRoute>
-        ),
+        element: <Dashboard></Dashboard>,
         loader: ({ params }) =>
           fetch(
             `https://server-side-virid.vercel.app/dashboard/${params.email}`
           ),
+      },
+      {
+        path: 'additem',
+        element: <AddItem></AddItem>,
       },
     ],
   },
