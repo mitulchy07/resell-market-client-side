@@ -18,12 +18,31 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // const userInfo = {
-        //   displayName: data.name,
-        // };
-
         updateUser(data.name);
         notify();
+
+        const userData = {
+          userName: data.name,
+          userEmail: data.email,
+          role: data.status,
+          verified: false,
+        };
+
+        fetch('https://server-side-virid.vercel.app/users ', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.acknowledged) {
+              console.log('data added');
+            }
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.error(err);
@@ -71,7 +90,7 @@ const Register = () => {
         <input
           {...register('status', { required: true })}
           type='radio'
-          value='Buyer'
+          value='buyer'
           className='radio radio-secondary'
           checked
         />
@@ -79,7 +98,7 @@ const Register = () => {
         <input
           {...register('status', { required: true })}
           type='radio'
-          value='Seller'
+          value='seller'
           className='radio radio-secondary'
         />
         <span className='mx-5'>Seller</span>
