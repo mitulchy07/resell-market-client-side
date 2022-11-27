@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
@@ -9,6 +10,7 @@ const AddItem = () => {
   const curr = new Date();
   curr.setDate(curr.getDate());
   const date = curr.toISOString().substring(0, 10);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -57,6 +59,8 @@ const AddItem = () => {
       .then((imgData) => {
         console.log(imgData);
         toast('Item added for sell');
+        reset();
+        navigate('/myitems');
       });
     console.log(carData);
   };

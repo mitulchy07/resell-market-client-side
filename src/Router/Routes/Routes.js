@@ -4,6 +4,7 @@ import Main from '../../layout/Main';
 import Blog from '../../Pages/Blog/Blog';
 import AddItem from '../../Pages/Dashboard/AddItem/AddItem';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
+import MyItems from '../../Pages/Dashboard/MyItems/MyItems';
 
 import Faq from '../../Pages/Faq/Faq';
 import Home from '../../Pages/Home/Home/Home';
@@ -55,8 +56,14 @@ const router = createBrowserRouter([
           ),
       },
       {
-        path: 'additem',
+        path: '/additem',
         element: <AddItem></AddItem>,
+      },
+      {
+        path: '/myitems/:email',
+        element: <MyItems></MyItems>,
+        loader: ({ params }) =>
+          fetch(`https://server-side-virid.vercel.app/myitems/${params.email}`),
       },
     ],
   },

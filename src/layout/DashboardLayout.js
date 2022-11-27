@@ -41,7 +41,7 @@ const DashboardLayout = () => {
               )}
               {role === 'seller' ? (
                 <li>
-                  <Link>See your items</Link>
+                  <Link to={`/myitems/${user?.email}`}>See your items</Link>
                 </li>
               ) : (
                 ''
