@@ -19,34 +19,6 @@ const AddItem = () => {
   } = useForm();
 
   const handleSubmitItem = (data) => {
-    const carData = {
-      email: data.email,
-      model: data.model,
-      price: data.price,
-      phone: data.phone,
-      location: data.location,
-      description: data.description,
-      category: data.category,
-      boughtdate: data.boughtdate,
-      condition: data.condition,
-      image: data.image,
-      postdate: data.posteddate,
-    };
-    fetch('https://server-side-virid.vercel.app/sell', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(carData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          console.log('data added');
-        }
-      })
-      .catch((err) => console.error(err));
     const image = data.image[0];
     const formData = new FormData();
     formData.append('image', image);
@@ -57,12 +29,40 @@ const AddItem = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        console.log(imgData);
-        toast('Item added for sell');
-        reset();
-        navigate('/myitems');
+        const carData = {
+          email: data.email,
+          model: data.model,
+          price: data.price,
+          phone: data.phone,
+          location: data.location,
+          description: data.description,
+          category: data.category,
+          boughtdate: data.boughtdate,
+          condition: data.condition,
+          image: imgData.data.url,
+          postdate: data.posteddate,
+        };
+        fetch('https://server-side-virid.vercel.app/sell', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(carData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.acknowledged) {
+              console.log('data added');
+            }
+            toast('Item added for sell');
+            reset();
+            navigate(`/myitems/${user?.email}`);
+          })
+          .catch((err) => console.error(err));
+
+        console.log(carData);
       });
-    console.log(carData);
   };
   return (
     <form
