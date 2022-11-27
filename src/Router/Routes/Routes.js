@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import DashboardLayout from '../../layout/DashboardLayout';
 import Main from '../../layout/Main';
 import Blog from '../../Pages/Blog/Blog';
+import Cars from '../../Pages/Cars/Cars';
 import AddItem from '../../Pages/Dashboard/AddItem/AddItem';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyItems from '../../Pages/Dashboard/MyItems/MyItems';
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>,
+      },
+      {
+        path: '/category/:category',
+        element: <Cars></Cars>,
+        loader: ({ params }) =>
+          fetch(
+            `https://server-side-virid.vercel.app/category/${params.category}`
+          ),
       },
     ],
   },

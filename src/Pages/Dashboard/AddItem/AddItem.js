@@ -41,6 +41,12 @@ const AddItem = () => {
           condition: data.condition,
           image: imgData.data.url,
           postdate: data.posteddate,
+          sellername: data.sellername,
+          verified: false,
+          reported: false,
+          booked: false,
+          sold: false,
+          advertise: false,
         };
         fetch('https://server-side-virid.vercel.app/sell', {
           method: 'POST',
@@ -76,8 +82,16 @@ const AddItem = () => {
         {...register('model', { required: 'Name is requierd' })}
         placeholder='Car Model'
       />
-      {errors.model && (
-        <p className='text-red-600'> {errors.model?.message} </p>
+      <input
+        className='input btn-success btn-outline'
+        type='text'
+        {...register('sellername', { required: 'Name is requierd' })}
+        placeholder='What is your name?'
+        defaultValue={user?.displayName}
+        hidden
+      />
+      {errors.sellername && (
+        <p className='text-red-600'> {errors.sellername?.message} </p>
       )}
       <input
         className='input btn-success btn-outline'
