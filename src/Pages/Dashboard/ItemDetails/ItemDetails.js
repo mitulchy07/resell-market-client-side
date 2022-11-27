@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ItemDetails = ({ cardata }) => {
+const ItemDetails = ({ cardata, handleDelete }) => {
   const {
+    _id,
     email,
     model,
     price,
@@ -40,7 +41,14 @@ const ItemDetails = ({ cardata }) => {
             ) : (
               ''
             )}
-            <Link className='btn mx-2 bg-red-500 text-white'>Delete</Link>
+            <Link
+              onClick={() => {
+                handleDelete(_id);
+              }}
+              className='btn btn-circle mx-2  text-white'
+            >
+              X
+            </Link>
           </div>
         </div>
       </div>
