@@ -5,6 +5,9 @@ import ItemDetails from '../ItemDetails/ItemDetails';
 
 const MyItems = () => {
   //   const carData = useLoaderData();
+  const advertise = {
+    advertise: true,
+  };
   const { user } = useContext(AuthContext);
   const [cart, setCart] = useState([]);
   useEffect(() => {
@@ -38,6 +41,33 @@ const MyItems = () => {
         });
     }
   };
+  const handleAdvertise = (id) => {
+    fetch(`https://server-side-virid.vercel.app/myitems/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(advertise),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success('Review Updated', {
+            position: 'top-center',
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+          //   const remaining = cart.filter((odr) => odr._id === id);
+          //   setCart(remaining);
+        }
+        console.log(data);
+      });
+  };
 
   return (
     <div className='grid grid-cols-1  gap-5 m-4 justify-center justify-self-center'>
@@ -53,6 +83,7 @@ const MyItems = () => {
           key={cardata._id}
           cardata={cardata}
           handleDelete={handleDelete}
+          handleAdvertise={handleAdvertise}
         ></ItemDetails>
       ))}
     </div>

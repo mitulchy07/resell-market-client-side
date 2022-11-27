@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const ItemDetails = ({ cardata, handleDelete }) => {
+const ItemDetails = ({ cardata, handleDelete, handleAdvertise }) => {
   const {
     _id,
     email,
@@ -16,6 +15,7 @@ const ItemDetails = ({ cardata, handleDelete }) => {
     image,
     postdate,
     booked,
+    advertise,
   } = cardata;
 
   return (
@@ -37,7 +37,18 @@ const ItemDetails = ({ cardata, handleDelete }) => {
           <p>Posted for sell on: {postdate}</p>
           <div className='btn-group-vertical m-5'>
             {booked === false ? (
-              <Link className='btn bg-green-700 text-white'>Advertise</Link>
+              <Link
+                onClick={() => {
+                  handleAdvertise(_id);
+                }}
+                className={
+                  advertise === true
+                    ? 'btn bg-gray-400 text-white'
+                    : 'btn bg-green-700 text-white'
+                }
+              >
+                {advertise === false ? 'Advertise' : 'Already Advertised'}
+              </Link>
             ) : (
               ''
             )}
