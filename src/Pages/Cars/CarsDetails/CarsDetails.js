@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CarsDetails = ({ carDetails }) => {
+  const booking = {
+    booked: true,
+  };
   const {
+    _id,
     email,
     model,
     price,
@@ -16,6 +21,39 @@ const CarsDetails = ({ carDetails }) => {
     postdate,
     booked,
   } = carDetails;
+  const refresh = () => {
+    window.location.reload();
+  };
+
+  const handleBooking = (id) => {
+    fetch(`https://server-side-virid.vercel.app/booking/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success('Booked', {
+            position: 'top-center',
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+          refresh();
+        }
+        console.log(data);
+      });
+  };
+  const handleReport = (id) => {
+    console.log(id);
+  };
   return (
     <div>
       <div>
@@ -40,13 +78,21 @@ const CarsDetails = ({ carDetails }) => {
             <p>Posted for sell on: {postdate}</p>
             <div className='flex m-5'>
               {booked === false ? (
-                <Link className='btn bg-green-700 text-white'>Book Now</Link>
+                <Link
+                  onClick={() => handleBooking(_id)}
+                  className='btn bg-green-700 text-white'
+                >
+                  Book Now
+                </Link>
               ) : (
                 <Link className='btn bg-gray-500 text-white disabled:opacity-75'>
                   Booked Already
                 </Link>
               )}
-              <Link className='btn mx-2 bg-red-500 text-white'>
+              <Link
+                onClick={() => handleReport(_id)}
+                className='btn mx-2 bg-red-500 text-white'
+              >
                 Report to admin
               </Link>
             </div>

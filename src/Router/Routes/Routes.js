@@ -4,9 +4,11 @@ import Main from '../../layout/Main';
 import Blog from '../../Pages/Blog/Blog';
 import Cars from '../../Pages/Cars/Cars';
 import AddItem from '../../Pages/Dashboard/AddItem/AddItem';
+import AllBuyers from '../../Pages/Dashboard/AllBuyers/AllBuyers';
+import AllSellers from '../../Pages/Dashboard/AllSellers/AllSellers';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyItems from '../../Pages/Dashboard/MyItems/MyItems';
-
+import ReportedItems from '../../Pages/Dashboard/ReportedItems/ReportedItems';
 import Faq from '../../Pages/Faq/Faq';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login';
@@ -73,6 +75,18 @@ const router = createBrowserRouter([
         element: <MyItems></MyItems>,
         loader: ({ params }) =>
           fetch(`https://server-side-virid.vercel.app/myitems/${params.email}`),
+      },
+      {
+        path: '/allbuyers',
+        element: <AllBuyers></AllBuyers>,
+      },
+      {
+        path: '/allsellers',
+        element: <AllSellers></AllSellers>,
+      },
+      {
+        path: '/reporteditems',
+        element: <ReportedItems></ReportedItems>,
       },
     ],
   },

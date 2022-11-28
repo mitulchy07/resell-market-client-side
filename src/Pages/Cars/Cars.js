@@ -4,7 +4,6 @@ import CarsDetails from './CarsDetails/CarsDetails';
 
 const Cars = () => {
   const carDeteils = useLoaderData();
-
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-5 m-5'>
       {carDeteils.map((carDetails) => (

@@ -55,14 +55,21 @@ const DashboardLayout = () => {
               )}
               {role === 'admin' ? (
                 <li>
-                  <Link>See all buyers</Link>
+                  <Link to='/allbuyers'>See all buyers</Link>
                 </li>
               ) : (
                 ''
               )}
               {role === 'admin' ? (
                 <li>
-                  <Link>See all sellers</Link>
+                  <Link to='/allsellers'>See all sellers</Link>
+                </li>
+              ) : (
+                ''
+              )}
+              {role === 'admin' ? (
+                <li>
+                  <Link to='/reporteditems'>Reported Items</Link>
                 </li>
               ) : (
                 ''

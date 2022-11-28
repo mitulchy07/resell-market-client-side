@@ -1,20 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import ItemDetails from '../ItemDetails/ItemDetails';
 
 const MyItems = () => {
-  //   const carData = useLoaderData();
   const advertise = {
     advertise: true,
   };
   const { user } = useContext(AuthContext);
-  const [cart, setCart] = useState([]);
-  useEffect(() => {
-    fetch(`https://server-side-virid.vercel.app/myitems/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setCart(data));
-  }, [user?.email]);
+
+  const { data: cart = [], refetch } = useQuery({
+    queryKey: ['cart', `${user?.email}`],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://server-side-virid.vercel.app/myitems/${user?.email}`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+
   const handleDelete = (id) => {
     const proceed = window.confirm('Are You Sure?');
     if (proceed) {
@@ -35,8 +41,7 @@ const MyItems = () => {
               progress: undefined,
               theme: 'dark',
             });
-            const remaining = cart.filter((odr) => odr._id !== id);
-            setCart(remaining);
+            refetch();
           }
         });
     }
@@ -52,7 +57,7 @@ const MyItems = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          toast.success('Review Updated', {
+          toast.success('Your is advertised.', {
             position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
@@ -62,8 +67,7 @@ const MyItems = () => {
             progress: undefined,
             theme: 'dark',
           });
-          //   const remaining = cart.filter((odr) => odr._id === id);
-          //   setCart(remaining);
+          refetch();
         }
         console.log(data);
       });
