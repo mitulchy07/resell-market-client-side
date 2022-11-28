@@ -64,26 +64,6 @@ const CarsDetails = ({ carDetails }) => {
             theme: 'dark',
           });
         }
-
-        // fetch('https://server-side-virid.vercel.app/orders', {
-        //   method: 'POST',
-        //   headers: {
-        //     'content-type': 'application/json',
-        //   },
-        //   body: JSON.stringify(orderData),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //   })
-        //   .catch((err) => console.error(err));
-
-        // axios({
-        //   method: 'post',
-        //   url: 'https://server-side-virid.vercel.app/orders',
-        //   data: { orderData },
-        // });
-        // console.log(data);
       });
   };
   const handleReport = (id) => {

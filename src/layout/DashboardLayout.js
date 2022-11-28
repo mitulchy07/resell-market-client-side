@@ -48,7 +48,7 @@ const DashboardLayout = () => {
               )}
               {role === 'buyer' ? (
                 <li>
-                  <Link>My Oreders</Link>
+                  <Link to='/myorders'>My Oreders</Link>
                 </li>
               ) : (
                 ''
