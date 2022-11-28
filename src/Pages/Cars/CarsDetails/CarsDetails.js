@@ -1,6 +1,8 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const CarsDetails = ({ carDetails }) => {
   const booking = {
@@ -21,9 +23,7 @@ const CarsDetails = ({ carDetails }) => {
     postdate,
     booked,
   } = carDetails;
-  const refresh = () => {
-    window.location.reload();
-  };
+  const { user } = useContext(AuthContext);
 
   const handleBooking = (id) => {
     fetch(`https://server-side-virid.vercel.app/booking/${id}`, {
@@ -35,6 +35,23 @@ const CarsDetails = ({ carDetails }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        axios
+          .post('https://server-side-virid.vercel.app/orders', {
+            email: email,
+            model: model,
+            price: price,
+            phone: phone,
+            location: location,
+            description: description,
+            category: category,
+            boughtdate: boughtdate,
+            condition: condition,
+            image: image,
+            postdate: postdate,
+            booked: booked,
+            buyeremail: user?.email,
+          })
+          .then((res) => console.log('posting data', res));
         if (data.modifiedCount > 0) {
           toast.success('Booked', {
             position: 'top-center',
@@ -46,9 +63,27 @@ const CarsDetails = ({ carDetails }) => {
             progress: undefined,
             theme: 'dark',
           });
-          refresh();
         }
-        console.log(data);
+
+        // fetch('https://server-side-virid.vercel.app/orders', {
+        //   method: 'POST',
+        //   headers: {
+        //     'content-type': 'application/json',
+        //   },
+        //   body: JSON.stringify(orderData),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //   })
+        //   .catch((err) => console.error(err));
+
+        // axios({
+        //   method: 'post',
+        //   url: 'https://server-side-virid.vercel.app/orders',
+        //   data: { orderData },
+        // });
+        // console.log(data);
       });
   };
   const handleReport = (id) => {
