@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Footer.css';
 
 const Footer = () => {
   return (
     <div>
-      <footer className='footer footer-center p-10 bg-primary text-primary-content'>
+      <footer className='footer footer-center p-10 footerbg text-primary-content'>
         <div>
           <img
             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmsXC9m1hhVaaM7Xtd4uh5q9HJfp5H78qiH48tojh-M4-PDDLhugctBIcn52MFQNSbY0Q&usqp=CAU'
@@ -15,10 +16,10 @@ const Footer = () => {
           />
 
           <p className='font-bold'>
-            ACME Industries Ltd. <br />
-            Providing reliable tech since 1992
+            ReSell Market. <br />
+            Providing reliable reselling opportunity since 2012
           </p>
-          <p>Copyright © 2022 - All right reserved</p>
+          <p>Copyright © 2022 - Hasan Chowdhuri - All right reserved</p>
         </div>
         <div>
           <div className='grid grid-flow-col gap-4'>

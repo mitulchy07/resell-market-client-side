@@ -14,6 +14,7 @@ import Faq from '../../Pages/Faq/Faq';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login';
 import Register from '../../Pages/Login/Register';
+import NoData from '../../Pages/NoData/NoData';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/category/:category',
-        element: <Cars></Cars>,
+        element: (
+          <PrivateRoute>
+            <Cars></Cars>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(
             `https://server-side-virid.vercel.app/category/${params.category}`
@@ -97,7 +102,7 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: 'No Route found here.',
+    element: <NoData></NoData>,
   },
 ]);
 

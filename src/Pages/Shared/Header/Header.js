@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import './Header.css';
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   return (
     <div>
-      <div className='navbar bg-base-100'>
+      <div className='navbar navbg'>
         <div className='navbar-start'>
           <div className='dropdown'>
             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
@@ -27,7 +28,7 @@ const Header = () => {
             </label>
             <ul
               tabIndex={0}
-              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
+              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-warning rounded-box w-52'
             >
               <li>
                 <Link to='/blog'>Blog</Link>
@@ -58,7 +59,7 @@ const Header = () => {
               alt=''
             />
             <span>
-              <span className='text-success'>CAR</span>RESELL
+              <span className='text-black'>CAR</span>RESELL
             </span>
           </Link>
           <label
@@ -99,11 +100,11 @@ const Header = () => {
         </div>
         <div className='navbar-end mx-5 hidden lg:flex'>
           {user?.email ? (
-            <Link className='btn btn-primary' onClick={logout}>
+            <Link className='btn btn-ghost' onClick={logout}>
               Logout
             </Link>
           ) : (
-            <Link className='btn btn-primary' to='/login'>
+            <Link className='btn btn-ghost' to='/login'>
               Login
             </Link>
           )}

@@ -8,6 +8,9 @@ const CarsDetails = ({ carDetails }) => {
   const booking = {
     booked: true,
   };
+  const report = {
+    reported: true,
+  };
   const {
     _id,
     email,
@@ -22,8 +25,11 @@ const CarsDetails = ({ carDetails }) => {
     image,
     postdate,
     booked,
+    reported,
+    sellername,
+    verified,
   } = carDetails;
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const handleBooking = (id) => {
     fetch(`https://server-side-virid.vercel.app/booking/${id}`, {
@@ -67,10 +73,33 @@ const CarsDetails = ({ carDetails }) => {
       });
   };
   const handleReport = (id) => {
-    console.log(id);
+    fetch(`https://server-side-virid.vercel.app/report/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(report),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success('Reported', {
+            position: 'top-center',
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+        }
+      });
   };
   return (
     <div>
+      {loading ? <progress className='progress w-56 m-5'></progress> : ''}
       <div>
         <div className='card md:card-side bg-base-100 shadow-xl w-auto btn-ghost btn-outline '>
           <figure>
@@ -88,28 +117,45 @@ const CarsDetails = ({ carDetails }) => {
             <p>First Buying Date: {boughtdate}</p>
             <p>Condition: {condition}</p>
             <p>Phone: {phone}</p>
-            <p>Email: {email}</p>
+            <p>Contact Email: {email}</p>
+            <p>
+              Posted By:
+              {sellername}
+              {verified ? (
+                <h2>(Verified Seller)</h2>
+              ) : (
+                <h2 className='font-bold'>(Not Verified yet)</h2>
+              )}{' '}
+            </p>
             <p>Place: {location}</p>
+
             <p>Posted for sell on: {postdate}</p>
-            <div className='flex m-5'>
+            <div className='md:flex m-5 '>
               {booked === false ? (
                 <Link
                   onClick={() => handleBooking(_id)}
-                  className='btn bg-green-700 text-white'
+                  className='btn text-white'
                 >
                   Book Now
                 </Link>
               ) : (
                 <Link className='btn bg-gray-500 text-white disabled:opacity-75'>
-                  Booked Already
+                  Booked
                 </Link>
               )}
-              <Link
-                onClick={() => handleReport(_id)}
-                className='btn mx-2 bg-red-500 text-white'
-              >
-                Report to admin
-              </Link>
+
+              {reported === false ? (
+                <Link
+                  onClick={() => handleReport(_id)}
+                  className='btn mx-2 bg-red-500 text-white'
+                >
+                  Report to admin
+                </Link>
+              ) : (
+                <Link className='btn mx-2 bg-red-300 text-white'>
+                  Under Review
+                </Link>
+              )}
             </div>
           </div>
         </div>

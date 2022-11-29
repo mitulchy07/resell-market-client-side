@@ -34,7 +34,7 @@ export const Contact = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 container p-4 text-white'>
+    <div className='grid grid-cols-1 md:grid-cols-2 p-4 text-white'>
       <div className='py-4'>
         <h1 className='text-xl '>Contact Me:</h1>
         <img src={img} alt='' className='rounded md:w-96' />
@@ -47,7 +47,7 @@ export const Contact = () => {
         >
           <label>Name</label>
           <input
-            className='input btn-success btn-outline'
+            className='input btn-ghost btn-outline'
             type='text'
             name='user_name'
             defaultValue={user?.displayName ? user.displayName : ''}
@@ -55,7 +55,7 @@ export const Contact = () => {
           />
           <label>Email</label>
           <input
-            className='input btn-success btn-outline'
+            className='input btn-ghost btn-outline'
             type='email'
             name='user_email'
             defaultValue={user?.email ? user.email : ' '}
@@ -63,11 +63,11 @@ export const Contact = () => {
           />
           <label>Message</label>
           <textarea
-            className='textarea btn-success btn-outline'
+            className='textarea btn-ghost btn-outline'
             name='message'
             required
           />
-          <input className='btn btn-success' type='submit' value='Send' />
+          <input className='btn' type='submit' value='Send' />
         </form>
       </div>
     </div>
